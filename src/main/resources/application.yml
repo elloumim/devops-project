@@ -1,0 +1,28 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  ## Specify DBMS
+  jpa:
+    database: MYSQL
+    show-sql: false
+    properties:
+      hibernate:
+        session_factory:
+          interceptor: com.bouali.gestiondestock.interceptor.Interceptor
+
+    # Hibernate DDL Auto (create, create-drop, update)
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+flickr:
+  apiKey: e6017aef7bebeffc113de04efec554b4
+  apiSecret: a2e10f69ece5c67c
+  appKey: 72157718699655397-a36ae267891db7e7
+  appSecret: 04e870e57e18c55b

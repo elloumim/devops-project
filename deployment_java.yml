@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deployment
+  labels:
+    app: java-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+        - name: java-app-container
+          image: marwaelloumi/gestionstock
+          env:
+            - name: DB_URL
+              value: "jdbc:mysql://localhost:3306/stock"
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: password
+          ports:
+            - containerPort: 8080
+
